@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Countdown</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <script defer src="countdown.js"></script>
+</head>
+<body>
+  <div id="container">
+    <form id="config" hidden="true" name="config">
+      <p><label>Title: <input name="label" type="text"></label></p>
+      <p><label>Date: <input name="date" type="date"></label></p>
+      <p><label>Time: <input name="time" type="time"></label></p>
+      <p><input value="Configure" type="submit"></p>
+    </form>
+    <div id="countdown">
+      <div id="label" class="display"></div>
+      <div id="left" class="display"></div>
+    </div>
+    <div id="new">
+      <label><a href=".">New countdown</a></label>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+html {
+    font-family: 'Gill Sans', sans-serif;
+}
+
+#container {
+    position: absolute;
+    top: 10vh;
+    left: 10vw;
+    width: 80vw;
+    height: 80vh;
+    font-size: 36px;
+    text-align: center;
+    color: rgba(64, 64, 128, 1);
+    background: rgba(128, 128, 256, 1);
+}
+
+#config p {
+    font-size: 16px;
+}
+
+#countdown {
+    padding: 24px 12px;
+}
+
+#countdown div {
+    text-align: center;
+    padding: 12px;
+}
+
+div.label {
+    font-size: 36px;
+}
+
+div.countdown {
+    font-size: 30px;
+}
+
+div.time {
+    font-size: 12px;
+}
+
+#new {
+    font-size: 10px;
+    text-align: right;
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+}
