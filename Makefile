@@ -1,3 +1,9 @@
+SHELL := bash -O globstar
+
+files := index.html
+files += style.css
+files += countdown.js
+
 all: pretty lint
 
 pretty:
@@ -7,6 +13,8 @@ pretty:
 lint:
 	npx eslint *.js
 
+clean:
+	rm **/*~
 
 publish:
-	cp index.html style.css countdown.js ~/web/www.gigamonkeys.com/misc/countdown/
+	./publish.sh $(files)
