@@ -2,6 +2,11 @@ html {
     font-family: 'Gill Sans', sans-serif;
 }
 
+* {
+    padding: 0;
+    margin: 0;
+}
+
 #container {
     position: absolute;
     top: 10vh;
@@ -14,8 +19,34 @@ html {
     background: rgba(128, 128, 256, 1);
 }
 
+#config {
+    margin-top: 24px;
+    padding: 18px;
+    display: none; /* set to flex in countdown.js */
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 24px;
+}
+
 #config p {
     font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#config p label {
+    flex: 25%;
+}
+#config p input {
+    flex: 75%;
+    text-align: center;
+    background: rgba(200, 200, 256, 1);
+    font-family: 'Gill Sans', sans-serif;
+}
+
+input[type="submit"] {
+    padding: 6px;
 }
 
 #countdown {
@@ -27,7 +58,7 @@ html {
     padding: 12px;
 }
 
-div.label {
+div.title {
     font-size: 36px;
 }
 

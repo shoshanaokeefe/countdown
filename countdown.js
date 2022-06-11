@@ -2,6 +2,7 @@
 // otherwise used.
 let offset = 0;
 
+// eslint-disable-next-line no-unused-vars
 const setOffset = (year, month, date, hour = 12, min = 0, second = 0) => {
   offset = new Date(year, month - 1, date, hour, min, second).getTime() - new Date().getTime();
 };
@@ -19,16 +20,16 @@ const onLoad = (event) => {
   if (event.target.readyState === "complete") {
     const params = new URL(window.location).searchParams;
 
-    if (!params.get("label") || !params.get("date") || !params.get("time")) {
-      $("config").hidden = false;
+    if (!params.get("title") || !params.get("date") || !params.get("time")) {
+      $("config").style.display = "flex";
     } else {
-      const label = params.get("label");
+      const title = params.get("title");
       const date = params.get("date");
       const time = params.get("time");
       const end = parseDateAndTime(date, time);
       const done = params.get("done") || "🎉 Done 🎉";
 
-      const update = () => countdown(label, done, end, now());
+      const update = () => countdown(title, done, end, now());
 
       update();
       intervalID = setInterval(update, 1000);
@@ -36,11 +37,11 @@ const onLoad = (event) => {
   }
 };
 
-const countdown = (label, done, end, t) => {
+const countdown = (title, done, end, t) => {
   const millis = end.getTime() - t;
   if (millis < 0) clearInterval(intervalID);
   $("countdown").replaceChildren(
-    div(label, "label"),
+    div(title, "title"),
     div(millis > 0 ? countdownText(millis) : done, "countdown"),
     div(end, "time")
   );

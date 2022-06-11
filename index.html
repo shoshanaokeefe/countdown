@@ -11,11 +11,11 @@
 <body>
   <div id="container">
     <form id="config" hidden="true" name="config">
-      <p><label>Title: <input name="label" type="text"></label></p>
-      <p><label>Date: <input name="date" type="date"></label></p>
-      <p><label>Time: <input name="time" type="time"></label></p>
-      <p><label>When done: <input name="done" type="text" value="🎉 Done 🎉"></label></p>
-      <p><input value="Configure" type="submit"></p>
+      <p><label for="title">Title:</label><input name="title" type="text"></p>
+      <p><label for="date">Date:</label><input name="date" type="date"></p>
+      <p><label for="time">Time:</label><input name="time" type="time" value="00:00"></p>
+      <p><label for="done">When done:</label><input name="done" type="text" value="🎉 Done 🎉"></p>
+      <p><input value="Create" type="submit"></p>
     </form>
     <div id="countdown"></div>
     <div id="new">
