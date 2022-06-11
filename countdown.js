@@ -56,18 +56,28 @@ const div = (contents, className = null) => {
 const countdownText = (millis) => {
   let seconds = Math.floor(millis / 1000);
   let minutes = Math.floor(seconds / 60);
+  let hours = Math.floor(minutes / 60);
+  let days = Math.floor(hours / 24);
+  let weeks = Math.floor(days / 7);
+
   let ss = seconds % 60;
   let mm = minutes % 60;
-  let hours = Math.floor(minutes / 60);
   let hh = hours % 24;
-  let dd = Math.floor(hours / 24);
-  return `${dd} ${plural("day", dd)}, ${hh} ${plural("hour", hh)}, ${mm} ${plural("minute", mm)}, ${ss} ${plural(
-    "second",
-    ss
-  )}`;
+  let dd = days % 7;
+
+  let r = [
+    noZero(weeks, `${weeks} ${plural("week", weeks)}`),
+    noZero(dd, `${dd} ${plural("day", dd)}`),
+    noZero(hh, `${hh} ${plural("hour", hh)}`),
+    noZero(mm, `${mm} ${plural("minute", mm)}`),
+    noZero(ss, `${ss} ${plural("second", ss)}`),
+  ];
+  return r.filter((x) => x != null).join(", ");
 };
 
 const plural = (text, n) => (n == 1 ? text : text + "s");
+
+const noZero = (n, text) => (n == 0 ? null : text);
 
 const parseDateAndTime = (date, time) => {
   let [year, month, day] = date.split("-").map((s) => parseInt(s));
