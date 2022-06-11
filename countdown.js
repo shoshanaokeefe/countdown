@@ -21,18 +21,18 @@ const onLoad = (event) => {
 
     if (!params.get("label") || !params.get("date") || !params.get("time")) {
       $("config").hidden = false;
+    } else {
+      const label = params.get("label");
+      const date = params.get("date");
+      const time = params.get("time");
+      const end = parseDateAndTime(date, time);
+      const done = params.get("done") || "🎉 Done 🎉";
+
+      const update = () => countdown(label, done, end, now());
+
+      update();
+      intervalID = setInterval(update, 1000);
     }
-
-    const label = params.get("label");
-    const date = params.get("date");
-    const time = params.get("time");
-    const end = parseDateAndTime(date, time);
-    const done = params.get("done") || "🎉 Done 🎉";
-
-    const update = () => countdown(label, done, end, now());
-
-    update();
-    intervalID = setInterval(update, 1000);
   }
 };
 
