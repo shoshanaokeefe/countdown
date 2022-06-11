@@ -8,10 +8,12 @@ const setOffset = (year, month, date, hour = 12, min = 0, second = 0) => {
 
 // Always use this to get the "current" time to ease testing.
 const now = () => {
-  return new Date(new Date().getTime() + offset);
+  return new Date(new Date().getTime() + offset).getTime();
 };
 
 const $ = (id) => document.getElementById(id);
+
+let intervalID = null;
 
 const onLoad = (event) => {
   if (event.target.readyState === "complete") {
@@ -25,18 +27,21 @@ const onLoad = (event) => {
     const date = params.get("date");
     const time = params.get("time");
     const end = parseDateAndTime(date, time);
+    const done = params.get("done") || "🎉 Done 🎉";
 
-    const update = () => countdown(label, end, now());
+    const update = () => countdown(label, done, end, now());
 
     update();
-    setInterval(update, 1000);
+    intervalID = setInterval(update, 1000);
   }
 };
 
-const countdown = (label, end, t) => {
+const countdown = (label, done, end, t) => {
+  const millis = end.getTime() - t;
+  if (millis < 0) clearInterval(intervalID);
   $("countdown").replaceChildren(
     div(label, "label"),
-    div(countdownText(end.getTime() - t.getTime()), "countdown"),
+    div(millis > 0 ? countdownText(millis) : done, "countdown"),
     div(end, "time")
   );
 };
