@@ -20,10 +20,10 @@ const onLoad = (event) => {
   if (event.target.readyState === "complete") {
     const params = new URL(window.location).searchParams;
 
-    if (!params.get("title") || !params.get("date") || !params.get("time")) {
+    if (!(params.get("title") || params.get("label")) || !params.get("date") || !params.get("time")) {
       $("config").style.display = "flex";
     } else {
-      const title = params.get("title");
+      const title = params.get("title") || params.get("label");
       const date = params.get("date");
       const time = params.get("time");
       const end = parseDateAndTime(date, time);
