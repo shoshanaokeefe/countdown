@@ -8,7 +8,7 @@ sha=$(git log --pretty=tformat:%H -1);
 webdir=~/web/www.gigamonkeys.com/misc/$dir/
 
 mkdir -p "$webdir"
-cp "$@" $webdir
+cp -R "$@" $webdir
 cd $webdir
 git add .
 git commit -m "Publish $dir $sha" .
