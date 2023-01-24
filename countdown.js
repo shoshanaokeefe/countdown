@@ -28,8 +28,11 @@ const onLoad = (event) => {
       const time = params.get("time");
       const end = parseDateAndTime(date, time);
       const done = params.get("done") || "🎉 Done 🎉";
+      const justHours = params.get("hours");
 
-      const update = () => countdown(title, done, end, now());
+      const textFn = justHours ? countdownTextHoursMax : countdownText;
+
+      const update = () => countdown(title, done, end, now(), textFn);
 
       update();
       intervalID = setInterval(update, 1000);
@@ -37,12 +40,12 @@ const onLoad = (event) => {
   }
 };
 
-const countdown = (title, done, end, t) => {
+const countdown = (title, done, end, t, textFn) => {
   const millis = end.getTime() - t;
   if (millis < 0) clearInterval(intervalID);
   $("countdown").replaceChildren(
     div(title, "title"),
-    div(millis > 0 ? countdownText(millis) : done, "countdown"),
+    div(millis > 0 ? textFn(millis) : done, "countdown"),
     div(end, "time")
   );
 };
@@ -70,6 +73,22 @@ const countdownText = (millis) => {
     noZero(weeks, `${weeks} ${plural("week", weeks)}`),
     noZero(dd, `${dd} ${plural("day", dd)}`),
     noZero(hh, `${hh} ${plural("hour", hh)}`),
+    noZero(mm, `${mm} ${plural("minute", mm)}`),
+    noZero(ss, `${ss} ${plural("second", ss)}`),
+  ];
+  return r.filter((x) => x != null).join(", ");
+};
+
+const countdownTextHoursMax = (millis) => {
+  let seconds = Math.floor(millis / 1000);
+  let minutes = Math.floor(seconds / 60);
+  let hours = Math.floor(minutes / 60);
+
+  let ss = seconds % 60;
+  let mm = minutes % 60;
+
+  let r = [
+    noZero(hours, `${hours} ${plural("hour", hours)}`),
     noZero(mm, `${mm} ${plural("minute", mm)}`),
     noZero(ss, `${ss} ${plural("second", ss)}`),
   ];
