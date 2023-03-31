@@ -16,27 +16,25 @@ const $ = (id) => document.getElementById(id);
 
 let intervalID = null;
 
-const onLoad = (event) => {
-  if (event.target.readyState === "complete") {
-    const params = new URL(window.location).searchParams;
+const start = () => {
+  const params = new URL(window.location).searchParams;
 
-    if (!(params.get("title") || params.get("label")) || !params.get("date") || !params.get("time")) {
-      $("config").style.display = "flex";
-    } else {
-      const title = params.get("title") || params.get("label");
-      const date = params.get("date");
-      const time = params.get("time");
-      const end = parseDateAndTime(date, time);
-      const done = params.get("done") || "🎉 Done 🎉";
-      const justHours = params.get("hours");
+  if (!(params.get("title") || params.get("label")) || !params.get("date") || !params.get("time")) {
+    $("config").style.display = "flex";
+  } else {
+    const title = params.get("title") || params.get("label");
+    const date = params.get("date");
+    const time = params.get("time");
+    const end = parseDateAndTime(date, time);
+    const done = params.get("done") || "🎉 Done 🎉";
+    const justHours = params.get("hours");
 
-      const textFn = justHours ? countdownTextHoursMax : countdownText;
+    const textFn = justHours ? countdownTextHoursMax : countdownText;
 
-      const update = () => countdown(title, done, end, now(), textFn);
+    const update = () => countdown(title, done, end, now(), textFn);
 
-      update();
-      intervalID = setInterval(update, 1000);
-    }
+    update();
+    intervalID = setInterval(update, 1000);
   }
 };
 
@@ -105,4 +103,4 @@ const parseDateAndTime = (date, time) => {
   return new Date(year, month - 1, day, h, m);
 };
 
-document.addEventListener("readystatechange", onLoad);
+start();
